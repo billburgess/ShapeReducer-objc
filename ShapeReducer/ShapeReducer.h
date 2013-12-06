@@ -20,9 +20,10 @@
     BOOL _needs_sort;
 }
 
-@property (nonatomic, retain) NSMutableArray *_points;
+@property (nonatomic, strong) NSMutableArray *_points;
 @property BOOL _needs_sort;
 
+- (id)initWithPoints:(NSArray *)points;
 - (void)addPoint:(ShapePoint *)point;
 - (NSArray *)points;
 

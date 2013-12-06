@@ -1,4 +1,5 @@
 #import "ShapeReducer.h"
+#import <CoreLocation/CoreLocation.h>
 
 @implementation ShapePoint
 
@@ -34,6 +35,22 @@
     return self;
 }
 
+- (id)initWithPoints:(NSArray *)points {
+    self = [super init];
+    if (self) {
+        _needs_sort = NO;
+        _points = [[NSMutableArray alloc] init];
+        
+        int i = 1;
+        for (CLLocation *loc in points) {
+            ShapePoint *point = [[ShapePoint alloc] initWithLatitude:loc.coordinate.latitude longitude:loc.coordinate.longitude sequence:i];
+            [self addPoint:point];
+            i++;
+        }
+    }
+    return self;
+}
+
 - (void)addPoint:(ShapePoint *)point {
     [_points addObject:point];
     _needs_sort = YES;
@@ -56,11 +73,6 @@
     return _points;
 }
 
-- (void)dealloc {
-	[_points release];
-	[super dealloc];
-}
-
 @end
 
 
@@ -79,7 +91,7 @@
     }
     
     NSArray *points = [aShape points];
-    Shape *newShape = [[[Shape alloc] init] autorelease];
+    Shape *newShape = [[Shape alloc] init];
     
     [newShape addPoint:[points objectAtIndex:0]];
     [newShape addPoint:[points lastObject]];
