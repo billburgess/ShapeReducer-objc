@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-  s.name     = 'ShapeReducer'
+  s.name     = 'BBShapeReducer'
   s.version  = '1.0.1'
   s.license  = { :type => "BSD", :file => "LICENSE" }
   s.summary  = 'Path optimization using the Douglas-Peucker Line Approximation Algorithm.'
